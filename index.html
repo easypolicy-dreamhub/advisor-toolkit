@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Advisor Toolkit</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+/* =====================================================================
+   YOUR APPS — edit this list to add, remove or change apps.
+
+   To add a new app: copy one block from { to }, paste it below the
+   last one, and change the details. Keep the comma between blocks.
+
+   name  : what shows on the page
+   url   : the full link, starting with https://
+   icon  : any one emoji
+   about : one short line saying what it does
+   group : the heading it sits under (use an existing one, or type a new one)
+   note  : optional — a small reminder shown under the app (or delete the line)
+   ===================================================================== */
+const APPS = [
+  {
+    name:  "Panel Finder",
+    url:   "https://easypolicy-dreamhub.github.io/panel-finder/",
+    icon:  "🏥",
+    about: "Find Great Eastern panel hospitals, specialists and clinics",
+    group: "Client tools"
+  },
+  {
+    name:  "Legacy Checklist",
+    url:   "https://easypolicy-dreamhub.github.io/legacy-checklist/",
+    icon:  "📜",
+    about: "Walk clients through their legacy planning checklist",
+    group: "Client tools"
+  },
+  {
+    name:  "Nominee Form Filler",
+    url:   "https://easypolicy-dreamhub.github.io/panel-finder/nominee.html",
+    icon:  "🖋️",
+    about: "Key in nominee or trustee details and print the filled form",
+    group: "Admin"
+  },
+  {
+    name:  "HNW Coach",
+    url:   "https://gemini.google.com/gem/13q_jW_75ytI5u3adT3YOBt2A39UI3n1T?usp=sharing",
+    icon:  "🎯",
+    about: "Practise high-net-worth client conversations and objection handling",
+    group: "Coaching",
+    note:  "Opens in Gemini. Sign in with a Google account the Gem is shared with."
+  }
+];
+
+const PAGE_TITLE = "Advisor Toolkit";
+const PAGE_INTRO = "Every tool the team uses, in one place.";
+/* ===================== End of the part you edit ====================== */
+</script>
+
+<style>
+:root {
+  --bg: #EEF1F4;
+  --surface: #FFFFFF;
+  --ink: #18233A;
+  --muted: #5A6578;
+  --line: #D6DCE4;
+  --accent: #1F6F63;
+  --accent-soft: #DDEDEA;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111827; --surface: #1A2335; --ink: #E8ECF2; --muted: #9AA5B8;
+    --line: #2C374C; --accent: #5EC2AF; --accent-soft: #1D3B38;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111827; --surface: #1A2335; --ink: #E8ECF2; --muted: #9AA5B8;
+  --line: #2C374C; --accent: #5EC2AF; --accent-soft: #1D3B38;
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1rem/1.5 "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+main { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
+
+header h1 {
+  font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.2rem, 8vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.6rem;
+}
+header p { margin: 0 0 1.75rem; color: var(--muted); font-size: 1.05rem; }
+
+.search {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+}
+.search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+section { margin-top: 2rem; }
+section h2 {
+  font-family: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0 0 0.6rem;
+}
+ul { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+li + li { border-top: 1px solid var(--line); }
+
+a.app {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1rem 1.1rem;
+  color: inherit;
+  text-decoration: none;
+}
+a.app:hover { background: var(--accent-soft); }
+a.app:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.icon {
+  width: 3rem; height: 3rem;
+  display: grid; place-items: center;
+  font-size: 1.5rem;
+  background: var(--bg);
+  border-radius: 12px;
+}
+.name { font-weight: 600; font-size: 1.08rem; }
+.about { color: var(--muted); font-size: 0.93rem; }
+.note { color: var(--accent); font-size: 0.85rem; margin-top: 0.2rem; }
+.go { color: var(--muted); font-size: 1.3rem; }
+
+.empty { margin-top: 2rem; color: var(--muted); }
+footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1 id="title"></h1>
+    <p id="intro"></p>
+  </header>
+
+  <label for="q" class="sr" style="position:absolute;left:-9999px">Search apps</label>
+  <input id="q" class="search" type="search" placeholder="Search apps" autocomplete="off">
+
+  <div id="list"></div>
+  <p id="empty" class="empty" hidden>No app matches that. Clear the search to see everything.</p>
+
+  <footer id="count"></footer>
+</main>
+
+<script>
+document.getElementById("title").textContent = PAGE_TITLE;
+document.getElementById("intro").textContent = PAGE_INTRO;
+document.title = PAGE_TITLE;
+
+const listEl = document.getElementById("list");
+const emptyEl = document.getElementById("empty");
+
+function render(filter = "") {
+  const f = filter.trim().toLowerCase();
+  const shown = APPS.filter(a =>
+    !f || [a.name, a.about, a.group, a.note].join(" ").toLowerCase().includes(f)
+  );
+
+  const groups = [];
+  shown.forEach(a => {
+    const g = a.group || "Other";
+    let entry = groups.find(x => x.name === g);
+    if (!entry) { entry = { name: g, apps: [] }; groups.push(entry); }
+    entry.apps.push(a);
+  });
+
+  listEl.innerHTML = "";
+  groups.forEach(g => {
+    const sec = document.createElement("section");
+    const h = document.createElement("h2");
+    h.textContent = g.name;
+    const ul = document.createElement("ul");
+    g.apps.forEach(a => {
+      const li = document.createElement("li");
+      const link = document.createElement("a");
+      link.className = "app";
+      link.href = a.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.innerHTML = `<span class="icon" aria-hidden="true"></span>
+        <span><div class="name"></div><div class="about"></div></span>
+        <span class="go" aria-hidden="true">›</span>`;
+      link.querySelector(".icon").textContent = a.icon || "🔗";
+      link.querySelector(".name").textContent = a.name;
+      link.querySelector(".about").textContent = a.about || "";
+      if (a.note) {
+        const n = document.createElement("div");
+        n.className = "note";
+        n.textContent = a.note;
+        link.children[1].appendChild(n);
+      }
+      li.appendChild(link);
+      ul.appendChild(li);
+    });
+    sec.append(h, ul);
+    listEl.appendChild(sec);
+  });
+
+  emptyEl.hidden = shown.length > 0;
+  document.getElementById("count").textContent =
+    `${APPS.length} app${APPS.length === 1 ? "" : "s"} in the toolkit`;
+}
+
+document.getElementById("q").addEventListener("input", e => render(e.target.value));
+render();
+</script>
+</body>
+</html>
